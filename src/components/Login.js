@@ -7,14 +7,15 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router";
-
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/redux/userSlice";
+import { USER_ICON } from "../utils/constants";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState("true");
   const [errosMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
-  
+
+  const dispatch = useDispatch();
 
   const email = useRef(null);
   const password = useRef(null);
@@ -24,31 +25,31 @@ const Login = () => {
   };
 
   const handleButtonClick = () => {
-    // Signed up
     const message = checkValidData(email.current.value, password.current.value);
-    console.log(message);
     setErrorMessage(message);
-
     if (message) return;
 
     if (!isSignIn) {
+      // Sign Up Logic
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
         password.current.value
       )
-      
-     
         .then((userCredential) => {
           const user = userCredential.user;
-          //console.log(user, "user");
           updateProfile(user, {
             displayName: email.current.value,
-            photoURL:
-              "https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg",
           })
             .then(() => {
-              navigate("/browse");
+              const { uid, email, displayName } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                })
+              );
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -57,9 +58,10 @@ const Login = () => {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setErrorMessage(errorMessage);
+          setErrorMessage(errorCode + "-" + errorMessage);
         });
     } else {
+      // Sign In Logic
       signInWithEmailAndPassword(
         auth,
         email.current.value,
@@ -68,13 +70,11 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user, "user Sign In");
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setErrorMessage(errorMessage);
+          setErrorMessage(errorCode + "-" + errorMessage);
         });
     }
   };
