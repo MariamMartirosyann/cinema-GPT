@@ -1,16 +1,22 @@
 import React from "react";
+import {useSelector } from "react-redux";
+import useMovieTrailer from "../utils/hooks/useMovieTrailer";
 
-const VideoBackground = () => {
+
+const VideoBackground = ({ movieId }) => {
+ 
+  const trailerVideo = useSelector((store) => store.movies?.trailerVideo);
+  console.log(movieId,"movieId")
+
+  useMovieTrailer(movieId);
   return (
-    <div>
+    <div className="m-0 p-0">
       <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/Idh8n5XuYIA?si=s5ppK6NepP3Fb8Fh&amp;controls=0"
-        //title="YouTube video player"
-
-        allow="accelerometer; autoplay;   gyroscope; picture-in-picture; "
-        referRerpolicy="strict-origin-when-cross-origin"
+      className="w-[100%]  aspect-video"
+       
+        src={"https://www.youtube.com/embed/" + trailerVideo?.key+"?playlist="+ trailerVideo?.key+"&autoplay=1&controls=1&loop=1&mute=1"}
+        frameborder="0" allowfullscreen
+       
       ></iframe>
     </div>
   );
