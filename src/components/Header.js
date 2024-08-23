@@ -38,7 +38,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className=" absolute w-full px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between text-white">
+    <div className=" absolute w-full px-8  bg-gradient-to-b from-black z-10 flex justify-between text-white">
       <img className=" w-44" alt="logo" src={LOGO} />
       {user ? (
         <div className="flex flex-row my-auto p-2">
