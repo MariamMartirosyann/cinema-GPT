@@ -6,6 +6,8 @@ import { addTrailerVideo } from "../redux/moviesSlice";
 const useMovieTrailer = (movieId) => {
   const trailerVideo = useSelector((store) => store.movies?.trailerVideo);
 
+
+
   const dispatch = useDispatch();
   const getMovieVideo = async () => {
     const data = await fetch(
@@ -19,7 +21,7 @@ const useMovieTrailer = (movieId) => {
   };
 
   useEffect(() => {
-    getMovieVideo();
+   !trailerVideo && getMovieVideo();
   }, []);
 };
 

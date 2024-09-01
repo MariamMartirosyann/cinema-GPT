@@ -6,10 +6,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/redux/userSlice";
 import { LOGO } from "../utils/constants";
 import { USER_ICON } from "../utils/constants";
+import { toggleGptSearchView } from "../utils/redux/GPTSlice";
+import { changeLanguage } from "../utils/redux/configSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
+  const showGPTSearch=useSelector(store=>store.gpt.showGptSearch)
 
   const navigate = useNavigate();
   const handleSignOut = () => {
@@ -22,6 +25,14 @@ const Header = () => {
         // navigate("/error")
       });
   };
+
+  const handleGPTSearch = () => {
+    dispatch(toggleGptSearchView());
+  };
+
+  const handleLanguageChange =(e)=>{
+dispatch( changeLanguage(e.target.value))
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -41,7 +52,19 @@ const Header = () => {
     <div className=" absolute w-full px-8  bg-gradient-to-b from-black z-10 flex justify-between text-white">
       <img className=" w-44" alt="logo" src={LOGO} />
       {user ? (
-        <div className="flex flex-row my-auto p-2">
+        <div className="flex flex-row my-auto p-2 ">
+          {showGPTSearch? <select className="p-2 mx-2 bg-gray-900 text-white" onChange={handleLanguageChange}>
+            <option value="en">English</option>
+            <option value="ar">Հայերեն</option>
+            <option value="ru">Русский</option>
+          </select> :null}
+         
+          <button
+            className="px-4  mx-2 py-1 bg-purple-800 text-white rounded-md"
+            onClick={handleGPTSearch}
+          >
+             {showGPTSearch? "Homepage":"GPT Search"}
+          </button>
           <svg
             class="h-7 w-7 text-red-500"
             viewBox="0 0 24 24"
@@ -56,11 +79,7 @@ const Header = () => {
             <path d="M13.73 21a2 2 0 0 1-3.46 0" />
           </svg>
 
-          <img
-            src={USER_ICON}
-            alt="userIcon"
-            className=" w-6 h-7  mx-2 "
-          />
+          <img src={USER_ICON} alt="userIcon" className=" w-6 h-7  mx-2 " />
           {user?.email}
 
           <svg
