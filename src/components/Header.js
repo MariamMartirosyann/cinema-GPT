@@ -49,10 +49,11 @@ dispatch( changeLanguage(e.target.value))
   }, []);
 
   return (
-    <div className=" absolute w-full px-8  bg-gradient-to-b from-black z-10 flex justify-between text-white">
-      <img className=" w-44" alt="logo" src={LOGO} />
+    <div className=" absolute w-full px-8 md:bg-gradient-to-b from-black bg-black z-10 flex flex-col justify-between text-white md:flex-row">
+      <img className="w-44 mx-auto md:mx-0" alt="logo" src={LOGO} />
       {user ? (
-        <div className="flex flex-row my-auto p-2 ">
+        <div className="flex  flex-col md:flex-row my-auto  p-2 ">
+          <div className=" flex-row mx-auto md:mx-0 mb-6 justify-between">
           {showGPTSearch? <select className="p-2 mx-2 bg-gray-900 text-white" onChange={handleLanguageChange}>
             <option value="en">English</option>
             <option value="ar">Հայերեն</option>
@@ -65,6 +66,8 @@ dispatch( changeLanguage(e.target.value))
           >
              {showGPTSearch? "Homepage":"GPT Search"}
           </button>
+          </div>
+          <div className="flex flex-row mx-auto md:mx-0">
           <svg
             class="h-7 w-7 text-red-500"
             viewBox="0 0 24 24"
@@ -99,6 +102,7 @@ dispatch( changeLanguage(e.target.value))
             <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />{" "}
             <path d="M7 12h14l-3 -3m0 6l3 -3" />
           </svg>
+          </div>
         </div>
       ) : null}
     </div>
