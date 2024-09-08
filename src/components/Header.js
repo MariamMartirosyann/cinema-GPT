@@ -49,27 +49,27 @@ dispatch( changeLanguage(e.target.value))
   }, []);
 
   return (
-    <div className=" absolute w-full px-8 md:bg-gradient-to-b from-black bg-black z-10 flex flex-col justify-between text-white md:flex-row">
-      <img className="w-44 mx-auto md:mx-0" alt="logo" src={LOGO} />
+    <div className=" absolute w-full px-2 md:px-8 md:bg-gradient-to-b from-black bg-black z-10 flex  justify-between text-white flex-row">
+      <img className=" w-16 md:w-44 mx-0" alt="logo" src={LOGO} />
       {user ? (
-        <div className="flex  flex-col md:flex-row my-auto  p-2 ">
+        <div className="flex flex-row my-auto px-0 py-2 md:px-2 md:py-2">
           <div className=" flex-row mx-auto md:mx-0 mb-6 justify-between">
-          {showGPTSearch? <select className="p-2 mx-2 bg-gray-900 text-white" onChange={handleLanguageChange}>
+          {showGPTSearch? <select className="p-1  mx-0 md:mx-2 bg-gray-900 text-white md:text-sm" onChange={handleLanguageChange}>
             <option value="en">English</option>
             <option value="ar">Հայերեն</option>
             <option value="ru">Русский</option>
           </select> :null}
          
           <button
-            className="px-4  mx-2 py-1 bg-purple-800 text-white rounded-md"
+            className="px-1 md:px-4  mx-2 py-1 bg-purple-800 text-white rounded-md text-sm  md:text-balance"
             onClick={handleGPTSearch}
           >
-             {showGPTSearch? "Homepage":"GPT Search"}
+             {showGPTSearch? " Home ":"GPT Search"}
           </button>
           </div>
           <div className="flex flex-row mx-auto md:mx-0">
           <svg
-            class="h-7 w-7 text-red-500"
+            className="h-7 w-7 text-red-500 hidden md:inline-block"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -82,8 +82,8 @@ dispatch( changeLanguage(e.target.value))
             <path d="M13.73 21a2 2 0 0 1-3.46 0" />
           </svg>
 
-          <img src={USER_ICON} alt="userIcon" className=" w-6 h-7  mx-2 " />
-          {user?.email}
+          <img src={USER_ICON} alt="userIcon" className=" w-6 h-7  mx-2  hidden md:inline-block" />
+          <div className="hidden md:inline-block"> {user?.email}</div>
 
           <svg
             class="h-8 w-8 text-red-500 mx-4 cursor-pointer"
