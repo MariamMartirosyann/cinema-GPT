@@ -2,10 +2,16 @@ import React from "react";
 import MovieCard from "./MovieCard";
 import "react-multi-carousel/lib/styles.css";
 import Slider from "react-slick";
+import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router';
+
 
 const MovieList = ({ title, movies }) => {
-  if (!movies) return null;
 
+  const navigate=useNavigate()
+
+
+ 
   const settings = {
     dots: false,
     infinite: true,
@@ -44,24 +50,29 @@ const MovieList = ({ title, movies }) => {
       },
     ],
   };
-
+  if (!movies) return null;
   return (
-    <div className="mx-0 text-white text-sm md:text-2xl px-2 md:px-10 my-4">
+    <div className="mx-0 text-white text-sm md:text-2xl px-2 md:px-10 my-4" >
       {movies.length === 1 ? (
         <div className="bg-transparent">
           <div className="my-2">{title}</div>
+          <Link   className=" contain-style-none" to={`/browse/movie/${movies[0].id}`} >
           <MovieCard posterPath={movies[0].poster_path} hover={false} />
+          </Link>
         </div>
       ) : (
         <>
-          <div className=" my-2">{title}</div>
+          <div className=" my-2" >{title}</div>
           <Slider {...settings}>
             {movies?.map((movie) => (
+             <Link   className=" contain-style-none" to={`/browse/movie/${movie.id}`} >
               <MovieCard
                 hover="true"
                 key={movie.id}
                 posterPath={movie.poster_path}
+              
               />
+              </Link>
             ))}
           </Slider>
         </>

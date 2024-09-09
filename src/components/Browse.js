@@ -8,12 +8,14 @@ import SecondaryContainer from "./SecondaryContainer";
 import GPTSearch from "./GPTSearch";
 import { useSelector } from "react-redux";
 
+
 const Browse = () => {
   const showGPTSearch = useSelector((store) => store.gpt.showGptSearch);
 
   useNowPlayingMovies();
   usePopularMovies();
   useTopRatedMovies();
+ 
 
   return (
     <div className=" m-0 p-0 flex flex-col">

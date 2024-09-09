@@ -22,7 +22,7 @@ const VideoTitle = ({ title, overview }) => {
           </svg>
           Play
         </buttton>
-        <buttton className=" hidden xl:flex flex-row bg-slate-500  text-white py-4 px-8 mx-2  rounded-lg">
+        <buttton className=" hidden xl:flex flex-row bg-slate-500 ml-3 text-white my-2  py-4 px-8 rounded-lg">
           {" "}
           <svg
             className="h-5 w-5 mx-2 my-auto"
