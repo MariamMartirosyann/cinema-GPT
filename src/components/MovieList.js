@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import MovieCard from "./MovieCard";
 import "react-multi-carousel/lib/styles.css";
 import Slider from "react-slick";
@@ -50,13 +50,14 @@ const MovieList = ({ title, movies }) => {
       },
     ],
   };
+ 
   if (!movies) return null;
   return (
     <div className="mx-0 text-white text-sm md:text-2xl px-2 md:px-10 my-4" >
       {movies.length === 1 ? (
         <div className="bg-transparent">
           <div className="my-2">{title}</div>
-          <Link   className=" contain-style-none" to={`/browse/movie/${movies[0].id}`} >
+          <Link   className=" contain-style-none" to={`/browse/movie/${movies[0].idt}`}  >
           <MovieCard posterPath={movies[0].poster_path} hover={false} />
           </Link>
         </div>
@@ -65,10 +66,10 @@ const MovieList = ({ title, movies }) => {
           <div className=" my-2" >{title}</div>
           <Slider {...settings}>
             {movies?.map((movie) => (
-             <Link   className=" contain-style-none" to={`/browse/movie/${movie.id}`} >
+             <Link    className=" contain-style-none" to={`/browse/movie/${movie.id}`} key={movie.id} >
               <MovieCard
                 hover="true"
-                key={movie.id}
+                
                 posterPath={movie.poster_path}
               
               />

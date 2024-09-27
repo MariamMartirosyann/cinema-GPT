@@ -1,24 +1,78 @@
-import React, { useState, useEffect ,memo} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../utils/constants";
 import useCurrentMovie from "../utils/hooks/useCurrentMovie";
 
-
-import useGetALLMovies from "../utils/hooks/useGetALLMovies";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const MoviePage = () => {
+  const [moviesData, setMoviesData] = useState();
+  const [localStorageData, setLocalStorageData] = useState();
+  console.log(localStorageData, "localStorageData");
   const movieId = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const currnetId = Number(movieId.id);
 
-  useGetALLMovies();
+  const movies = useSelector((store) => store?.movies);
+  const gptMoviesAll = useSelector((store) => store.gpt?.movieResults);
 
-  const storeALLMovies = useSelector((store) => store.movies.allMovies);
+  const gptMovies = gptMoviesAll?.flat();
+  const nowPlayingMovies = movies?.nowPlayingMovies;
+  console.log(nowPlayingMovies, "nowPlayingMovies");
+  const popularMovies = movies?.popularMovies;
+  const topRatedMovies = movies?.topRatedMovies;
+
+  let allMovies = [];
+  const getAllMovies = () => {
+    if (nowPlayingMovies && popularMovies && topRatedMovies) {
+      if (!moviesData) {
+        allMovies = gptMovies
+          ? [
+              ...nowPlayingMovies,
+              ...popularMovies,
+              ...topRatedMovies,
+              ...gptMovies,
+            ]
+          : [...nowPlayingMovies, ...popularMovies, ...topRatedMovies];
+      }
+
+      console.log(allMovies, "nowPlayingMovies from getAllMovies");
+      setMoviesData(allMovies);
+    }
+  };
+
   const currentVideo = useSelector((store) => store.movies?.currentVideo);
+  console.log(currentVideo, currnetId, "currentVideo id");
 
-  const movie = storeALLMovies?.find((m) => m.id === currnetId);
-  
+  const getMoviesFromLocalStorage = () => {
+    const data = JSON?.parse(
+      window.localStorage.getItem("allMoviesLocalStorage")
+    );
+    setLocalStorageData(data);
+    setMoviesData(data);
+  };
+
+  const putMoviesTuLocalStorage = () => {
+    getAllMovies();
+
+    console.log(allMovies, "allMovies from put movies to L s");
+    window.localStorage.setItem(
+      "allMoviesLocalStorage",
+      JSON.stringify(allMovies)
+    );
+  };
+
+  console.log(moviesData, "moviesData");
+
+  const movie = moviesData?.find((m) => m.id === currnetId);
+
   useCurrentMovie(currnetId);
+
+  useEffect(() => {
+    !localStorageData ? putMoviesTuLocalStorage() : getMoviesFromLocalStorage();
+  }, []);
 
   return (
     <>
@@ -59,15 +113,15 @@ const MoviePage = () => {
             className="w-full aspect-video"
             src={"https://www.youtube.com/embed/" + currentVideo?.key}
             title="YouTube video player"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
           ></iframe>
         </div>
       </div>
     </>
   );
-}
+};
 
-export default memo(MoviePage);
+export default MoviePage;

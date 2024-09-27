@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import lang from "../utils/languageConstants";
+import lang from "../../utils/languageConstants";
 import { useDispatch, useSelector } from "react-redux";
-import client from "../utils/openai";
-import { API_OPTIONS } from "../utils/constants";
-import { addGptMovieResult } from "../utils/redux/GPTSlice";
+import client from "../../utils/openai";
+import { API_OPTIONS } from "../../utils/constants";
+import { addGptMovieResult } from "../../utils/redux/GPTSlice";
 
 const GPTSearchBar = () => {
   const [err, setErr] = useState("");
@@ -64,7 +64,7 @@ const GPTSearchBar = () => {
         <input
           ref={searchText}
           type="text"
-          className="p-4  m-4 col-span-12 md:col-span-9 "
+          className="p-4  m-4 col-span-12 md:col-span-9 text-sm md:text-lg"
           placeholder={lang[langKey].GPTSearchPlaceholder}
         ></input>{" "}
         <button

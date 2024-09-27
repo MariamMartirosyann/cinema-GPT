@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import MainLayout from "../Layouts/MainLayout";
-import Browse from "./../components/Browse";
-import MoviePage from "../components/MoviePage";
+import Browse from "../Pages/Browse"
+import MoviePage  from "../Pages/MoviePage"
 
 const MainRoutes = [
   {
@@ -17,10 +17,10 @@ const MainRoutes = [
         element: <MoviePage/>,
       },
      
-      {
-        path: "*",
-        element: <Navigate to={`/`} />,
-      },
+      // {
+      //   path: "*",
+      //   element: <Navigate to={`/`} />,
+      // },
     ],
   },
 ];

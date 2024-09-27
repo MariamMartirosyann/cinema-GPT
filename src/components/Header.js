@@ -89,7 +89,7 @@ const Header = () => {
           <div className="flex flex-row mx-auto md:mx-0">
             <svg
               className="h-7 w-7 text-red-500 hidden md:inline-block"
-              viewbox="0 0 24 24"
+              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -116,7 +116,7 @@ const Header = () => {
               strokeWidth="2"
               stroke="currentColor"
               fill="none"
-              strokLinecap="round"
+              strokeLinecap="round"
               strokeLinejoin="round"
               onClick={handleSignOut}
             >
