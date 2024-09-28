@@ -10,12 +10,17 @@ import { toggleGptSearchView } from "../utils/redux/GPTSlice";
 import { changeLanguage } from "../utils/redux/configSlice";
 import { Link } from "react-router-dom";
 import { nullCurrentVideo } from "../utils/redux/moviesSlice";
+import { useCurrentPathname } from "../utils/hooks/useCurrentPathname";
+import Browse from "./../Pages/Browse";
 
 const Header = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
   const showGPTSearch = useSelector((store) => store.gpt.showGptSearch);
+
+  const pathname = useCurrentPathname();
+  console.log(pathname);
 
   const navigate = useNavigate();
   const handleSignOut = () => {
@@ -35,7 +40,6 @@ const Header = () => {
 
   const handleLanguageChange = (e) => {
     dispatch(changeLanguage(e.target.value));
-  
   };
   const handleNavigateHome = () => {
     dispatch(nullCurrentVideo());
@@ -79,12 +83,14 @@ const Header = () => {
               </select>
             ) : null}
 
-            <button
-              className="px-1 md:px-4  mx-2 py-1 bg-purple-800 text-white rounded-md text-sm  md:text-balance"
-              onClick={handleGPTSearch}
-            >
-              {showGPTSearch ? " Home " : "GPT Search"}
-            </button>
+            {pathname === "/browse" ? (
+              <button
+                className="px-1 md:px-4  mx-2 py-1 bg-purple-800 text-white rounded-md text-sm  md:text-balance"
+                onClick={handleGPTSearch}
+              >
+                {showGPTSearch ? " Home " : "GPT Search"}
+              </button>
+            ) : null}
           </div>
           <div className="flex flex-row mx-auto md:mx-0">
             <svg

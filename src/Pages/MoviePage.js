@@ -87,7 +87,7 @@ const MoviePage = () => {
           </div>
           <div className="w-[100%] px-auto flex flex-col lg:w-2/3">
             <div className="w-full  text-2xl lg:text-5xl my-10 ">
-              <h1>{movie?.title}</h1>
+              <h1 className="mx-auto w-3/4">{movie?.title}</h1>
             </div>
             <div className="flex flex-row text-xl lg:text-3xl  mb-[8%]">
               <div className=" w-1/2">
