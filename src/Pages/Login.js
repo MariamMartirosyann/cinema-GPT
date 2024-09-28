@@ -93,14 +93,14 @@ const Login = () => {
         <h1 className="text-3xl mx-auto py-4">
           {isSignIn ? "Sign In" : "Sign Up"}
         </h1>
-        {!isSignIn ? (
+        {/* {!isSignIn ? (
           <input
           ref={name}
             type="text"
             placeholder="Full Name"
             className="p-4 m-2 w-full bg-gray-700"
           />
-        ) : null}
+        ) : null} */}
         <input
           ref={email}
           type="text"
