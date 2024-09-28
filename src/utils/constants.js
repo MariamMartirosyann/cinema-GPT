@@ -23,4 +23,4 @@ export const API_TOP_RATED =
   "https://api.themoviedb.org/3/tv/on_the_air?page=3";
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w200";
 
-export const OPENAI_KEY="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"
+export const OPENAI_KEY=process.env.REACT_APP_OPENAI_KEY
