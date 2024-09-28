@@ -24,3 +24,9 @@ export const API_TOP_RATED =
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w200";
 
 export const OPENAI_KEY=process.env.REACT_APP_OPENAI_KEY
+
+
+
+
+
+
