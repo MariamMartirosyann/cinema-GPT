@@ -101,12 +101,12 @@ const Login = () => {
             className="p-4 m-2 w-full bg-gray-700"
           />
         ) : null} */}
-        <input
+        {/* <input
           ref={email}
           type="text"
           placeholder="Email Adress"
           className="p-4 m-2 w-full bg-gray-700"
-        />
+        /> */}
         <input
           ref={password}
           type="password"
