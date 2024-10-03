@@ -1,4 +1,4 @@
-import Login from "../components/Login";
+import Login from "../Pages/Login";
 import MinimalLayout from "../Layouts/MinimalLayout";
 import NotFoundPage from "../Pages/NotFoundPage";
 
